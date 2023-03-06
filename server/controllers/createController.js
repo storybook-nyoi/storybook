@@ -1,21 +1,13 @@
-export const createController = {
-  createController: (req, res, next) => {
-    console.log("In getStory");
-    return next();
-  },
+const createController = {};
 
-  getImages: (req, res, next) => {
-    console.log("In getImages");
-    return next();
-  },
+createController.getStory = (req, res, next) => {
+  console.log('In getStory');
+  return next();
 };
 
-// createController.getStory = (req, res, next) => {
-//   console.log("In getStory");
-//   return next();
-// };
+createController.getImages = (req, res, next) => {
+  console.log('In getImages');
+  return next();
+};
 
-// createController.getImages = (req, res, next) => {
-//   console.log("In getImages");
-//   return next();
-// };
+module.exports = createController;
