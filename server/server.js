@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const createRouter = require('./routes/createRouter');
 
-// Defines cors middleware configuration
 const corsOptions = {
   credentials: true,
   origin: (origin, callback) => {
@@ -10,15 +10,22 @@ const corsOptions = {
   },
 };
 
+// Apply CORs with options, and handling parsing request body
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Set up routes
+app.use('/create', createRouter);
+
+// Route to serve up main app
+// app.get('/', (req, res) => res.status(200).sendFile());
+
+// Catch-All Route Handler
 app.use('*', (req, res) =>
   res.status(404).send("This is not the page you're looking for...")
 );
 
-app.use(express.json());
-
+// Global Error Handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

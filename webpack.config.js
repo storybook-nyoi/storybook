@@ -11,10 +11,8 @@ module.exports = {
     port: 3000,
     liveReload: true,
     proxy: {
-      '/paths': {
-        target: 'http://localhost:3000',
-        router: () => 'http://localhost:3001',
-        logLevel: 'debug',
+      '/create': {
+        target: 'http://localhost:3001',
       },
     },
   },
@@ -48,4 +46,7 @@ module.exports = {
     ],
   },
   plugins: [new HtmlWebpackPlugin({ template: './client/index.html' })],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
 };
