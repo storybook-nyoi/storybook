@@ -3,8 +3,15 @@ const app = express();
 const cors = require('cors');
 const createRouter = require('./routes/createRouter');
 
+const corsOptions = {
+  credentials: true,
+  origin: (origin, callback) => {
+    callback(null, true);
+  },
+};
+
 // Apply CORs with options, and handling parsing request body
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Set up routes
@@ -31,8 +38,8 @@ app.use((err, req, res, next) => {
 });
 
 // Listen to server on specified port (defined within config.js)
-// app.listen(3001, () => {
-//   console.log(`Server listening on port: ${3001}`);
-// });
+app.listen(3001, () => {
+  console.log(`Server listening on port: ${3001}`);
+});
 
 module.exports = app;

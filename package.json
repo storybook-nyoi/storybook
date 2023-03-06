@@ -4,9 +4,9 @@
   "description": "An AI-generated storybook creation application",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "webpack serve --mode development && nodemon server.js",
+    "start": "webpack serve --mode development & nodemon server/server.js",
     "client": "webpack serve --mode development",
-    "server": "nodemon index.js",
+    "server": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production"
   },

@@ -12,9 +12,7 @@ module.exports = {
     liveReload: true,
     proxy: {
       '/create': {
-        target: 'http://localhost:3000',
-        router: () => 'http://localhost:3001',
-        logLevel: 'debug',
+        target: 'http://localhost:3001',
       },
     },
   },
