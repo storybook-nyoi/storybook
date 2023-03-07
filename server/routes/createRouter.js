@@ -11,7 +11,7 @@ createRouter.post(
     console.log('res.locals.story', res.locals.story);
     return res.status(200).json({
       story: res.locals.story,
-      // images: res.locals.images,
+      images: res.locals.images,
     });
   }
 );

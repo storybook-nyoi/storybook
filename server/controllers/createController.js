@@ -5,45 +5,50 @@ const configuration = new Configuration({
   apiKey: OPENAI_API_KEY,
 });
 
+const openai = new OpenAIApi(configuration);
+
 const createController = {};
 
 createController.getStory = async (req, res, next) => {
   const prompt = req.body.prompt;
 
+  // get text data from api
   try {
-    const openai = new OpenAIApi(configuration);
+    // checking prompt length
     if (!prompt.length) {
       return next({
         log: `Bad request. No prompt entered. Please try again.`,
         status: 400,
+        message: { err: 'Error occurred in createController.getStory' },
+      });
+    }
+    // requesting text from api
+    const completion = await openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt,
+      max_tokens: 200,
+    });
+    // console.log('completion', completion);
+    const firstStory = completion.data.choices[0].text;
+    res.locals.story = firstStory;
+    return next();
+  } catch (error) {
+    if (error.response) {
+      return next({
+        log: `OpenAI API 'getStory' error in createController.getStory middleware: ${error.response.data}`,
+        status: error.response.status,
         message: {
-          err: 'Error occurred in createController.getStory',
+          err: 'An error occurred, please check server logs for details.',
+        },
+      });
+    } else {
+      return next({
+        log: `OpenAI API 'getStory' error in createController.getStory middleware: ${error.message}`,
+        message: {
+          err: 'An error occurred, please check server logs for details.',
         },
       });
     }
-    const res = await openai.createCompletion(
-      {
-        model: 'text-davinci-003',
-        prompt,
-      },
-      {
-        timeout: 100000,
-      }
-    );
-    // console.log('res', res);
-    const firstStory = res.data.choices[0].text;
-    // console.log('firstStory', firstStory);
-    res.locals.story = firstStory;
-    // console.log('res.locals.story', res.locals.story);
-    return next();
-  } catch (err) {
-    return next({
-      log: `OpenAI API 'getStory' error in createController.getStory middleware: ${err.message}`,
-      status: err.response.status,
-      message: {
-        err: 'An error occurred, please check server logs for details.',
-      },
-    });
   }
 };
 
