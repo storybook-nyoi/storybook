@@ -54,22 +54,24 @@ createController.getStory = async (req, res, next) => {
 };
 
 createController.getImages = async (req, res, next) => {
-  // const splitStory = res.locals.splitStory;
-  const prompt =
-    "Once upon a time, there was a beautiful princess named Isabella who lived in a grand castle on the edge of the sea. Isabella was known throughout the land for her kindness and intelligence, but she often felt restless and longed for adventure beyond the castle walls.";
+  const splitStory = res.locals.splitStory;
+  res.locals.images = {};
 
   // Get Images from DALL-E
   try {
-    // requesting Image Creation from DALL-E
-    const image = await openai.createImage({
-      prompt,
-      n: 1,
-      size: "1024x1024",
-    });
+    for (const key in splitStory) {
+      const prompt = splitStory[key];
 
-    const image_url = image.data.data[0].url;
-    res.locals.images = image_url;
+      // requesting Image Creation from DALL-E
+      const image = await openai.createImage({
+        prompt,
+        n: 1,
+        size: "1024x1024",
+      });
 
+      const image_url = image.data.data[0].url;
+      res.locals.images[key] = image_url;
+    }
     return next();
   } catch (error) {
     // Catch any errors with the OpenAI API call

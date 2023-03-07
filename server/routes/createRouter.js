@@ -5,7 +5,7 @@ const createRouter = express.Router();
 // GET request to main endpoint
 createRouter.post(
   "/",
-  // createController.getStory,
+  createController.getStory,
   createController.getImages,
   (req, res) => {
     return res.status(200).json({
