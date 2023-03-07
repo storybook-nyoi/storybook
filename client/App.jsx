@@ -22,15 +22,17 @@ const App = () => {
     fetch('/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'text/plain;charset=UTF-8',
+        'Content-Type': 'application/json',
       },
-      body: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}`,
+      body: JSON.stringify({
+        prompt: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}`,
+      }),
     })
       .then((data) => data.json())
       .then((data) => {
         let newState = Object.assign({}, state);
         newState.story = data.story;
-        newState.pictures = data.pictures;
+        // newState.pictures = data.pictures;
         newState.currPage = 1;
         setState(newState);
       });

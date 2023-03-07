@@ -8,28 +8,40 @@ const configuration = new Configuration({
 const createController = {};
 
 createController.getStory = async (req, res, next) => {
-  const prompt =
-    'Tell me a story about a princess that goes out into the sea and finds an opportunity';
+  const prompt = req.body.prompt;
 
   try {
     const openai = new OpenAIApi(configuration);
-    if (prompt === null) {
-      console.log('No prompt provided.');
-      return;
+    if (!prompt.length) {
+      return next({
+        log: `Bad request. No prompt entered. Please try again.`,
+        status: 400,
+        message: {
+          err: 'Error occurred in createController.getStory',
+        },
+      });
     }
-    const res = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt,
-    });
+    const res = await openai.createCompletion(
+      {
+        model: 'text-davinci-003',
+        prompt,
+      },
+      {
+        timeout: 100000,
+      }
+    );
+    // console.log('res', res);
     const firstStory = res.data.choices[0].text;
+    // console.log('firstStory', firstStory);
     res.locals.story = firstStory;
+    // console.log('res.locals.story', res.locals.story);
     return next();
   } catch (err) {
     return next({
       log: `OpenAI API 'getStory' error in createController.getStory middleware: ${err.message}`,
       status: err.response.status,
       message: {
-        err: 'An error occurred, pelase check server logs for details.',
+        err: 'An error occurred, please check server logs for details.',
       },
     });
   }

@@ -29,6 +29,7 @@ export default function InputCard(props) {
                 props.updateCharacter(e.target.value);
               }}
               className='select-xs'
+              defaultValue={'-------'}
             >
               {makeOptList(characters)}
             </select>
@@ -38,6 +39,7 @@ export default function InputCard(props) {
                 props.updateLocation(e.target.value);
               }}
               className='select-xs'
+              defaultValue={'-------'}
             >
               {makeOptList(locations)}
             </select>
@@ -47,6 +49,7 @@ export default function InputCard(props) {
                 props.updateEnding(e.target.value);
               }}
               className='select-xs'
+              defaultValue={'-------'}
             >
               {makeOptList(endings)}
             </select>
