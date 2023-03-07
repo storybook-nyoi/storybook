@@ -1,8 +1,8 @@
-const config = require('./util/config');
+const { OPENAI_API_KEY } = require('../util/config.js');
 const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
-  apiKey: config.OpenAIApi,
+  apiKey: OPENAI_API_KEY,
 });
 
 const createController = {};
