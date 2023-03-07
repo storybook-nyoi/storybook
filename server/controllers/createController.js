@@ -52,6 +52,31 @@ createController.getStory = async (req, res, next) => {
   }
 };
 
+createController.splitText = (req, res, next) => {
+  // store generated story in local variable
+  const story = res.locals.story;
+  // split string on line
+  const splits = story.split('\n');
+  // create object that will be passed onto next middleware
+  const splitStory = {};
+  // initialize counter to manage object key values
+  let counter = 1;
+  // iterate through array
+  splits.forEach((split) => {
+    // if a split is empty, don't add split into splitStory object
+    if (!split.length) {
+      return;
+    } else {
+      splitStory[counter] = split;
+      counter++;
+    }
+  });
+  // store splitStory into res.locals.splitStory
+  res.locals.splitStory = splitStory;
+  // move onto next middleware
+  return next();
+};
+
 createController.getImages = (req, res, next) => {
   return next();
 };
