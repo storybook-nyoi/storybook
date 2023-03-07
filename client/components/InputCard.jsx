@@ -7,7 +7,7 @@ export default function InputCard(props){
 
     return(
         <div className="flex h-4/5 flex-col justify-center align-center">
-          <div className="card w-96 bg-base-100 shadow-xl self-center align-center w-1/2 h-auto">
+          <div className="card w-96 bg-base-100 shadow-xl self-center align-center w-auto h-auto">
             <div className="card-body">
                 <p>Tell me a story about a&nbsp;&nbsp; 
                   <select type='select' onChange={(e)=>{props.updateCharacter(e.target.value)}} className="select-xs">

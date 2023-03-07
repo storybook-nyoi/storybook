@@ -10,15 +10,32 @@ const App = () => {
     storyToggle : false,
     character: '',
     location: '',
-    ending: ''
+    ending: '',
+    story: undefined,
+    pictures: undefined,
+    currPage: undefined,
   })
 
   function createStory(storyDetails){
     let newState = Object.assign({}, state);
     newState.storyToggle = true;
     setState(newState);
-    console.log(newState)
-  }
+    fetch('/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'text/plain;charset=UTF-8'
+      },
+      body: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}`
+    })
+    .then(data => data.json())
+    .then((data) => {
+      let newState = Object.assign({}, state);
+      newState.story =  data.story;
+      newState.pictures = data.pictures;
+      newState.currPage = 1;
+      setState(newState);
+    })
+      }
 
   function backToChooseStory(){
     let newState = Object.assign({}, state);
@@ -51,7 +68,7 @@ const App = () => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col h-screen">
         <Navbar/>
-        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory}/> :<InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
+        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story? state.story[state.currPage] : undefined} picutre={state.pictures? state.pictures[state.currPage]: undefined}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
       </div> 
       <SideDrawer/>
     </div>
