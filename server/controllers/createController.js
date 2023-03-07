@@ -2,7 +2,7 @@ const config = require('./util/config');
 const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
-  apiKey: `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`,
+  apiKey: config.OpenAIApi,
 });
 
 const createController = {};
