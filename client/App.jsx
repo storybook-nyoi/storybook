@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import Navbar from './components/Navbar.jsx';
-import InputCard from './components/InputCard.jsx';
-import StoryBook from './components/StoryBook.jsx';
-import SideDrawer from './components/SideDrawer.jsx';
+import React, { useState } from "react";
+import Navbar from "./components/Navbar.jsx";
+import InputCard from "./components/InputCard.jsx";
+import StoryBook from "./components/StoryBook.jsx";
+import SideDrawer from "./components/SideDrawer.jsx";
 
 const App = () => {
   let [state, setState] = useState({
     storyToggle: false,
-    character: '',
-    location: '',
-    ending: '',
+    character: "",
+    location: "",
+    ending: "",
     story: undefined,
     pictures: undefined,
     currPage: undefined,
@@ -19,23 +19,25 @@ const App = () => {
     let newState = Object.assign({}, state);
     newState.storyToggle = true;
     setState(newState);
-    fetch('/create', {
-      method: 'POST',
+    fetch("/create", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}. In 200 words.`})
+      body: JSON.stringify({
+        prompt: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}. In 200 words.`,
+      }),
     })
-    .then(data => data.json())
-    .then((data) => {
-      let newState = Object.assign({}, state);
-      newState.story =  data.story;
-      newState.pictures = data.pictures;
-      newState.storyToggle = true
-      newState.currPage = 1;
-      setState(newState);
-    })
-      }
+      .then((data) => data.json())
+      .then((data) => {
+        let newState = Object.assign({}, state);
+        newState.story = data.story;
+        newState.pictures = data.pictures;
+        newState.storyToggle = true;
+        newState.currPage = 1;
+        setState(newState);
+      });
+  }
 
   function backToChooseStory() {
     let newState = Object.assign({}, state);
@@ -58,38 +60,57 @@ const App = () => {
   function updateEnding(changed) {
     let newState = Object.assign({}, state);
     newState.ending = changed;
-    setState(newState)
+    setState(newState);
   }
 
-  function incrementPage(){
+  function incrementPage() {
     let newState = Object.assign({}, state);
-    if (state.story[state.currPage + 1]){
+    if (state.story[state.currPage + 1]) {
       newState.currPage += 1;
-      setState(newState)
+      setState(newState);
     }
   }
 
-  function decrementPage(){
+  function decrementPage() {
     let newState = Object.assign({}, state);
-    if (state.currPage > 1){
-      newState.currPage -=1;
-      setState(newState)
+    if (state.currPage > 1) {
+      newState.currPage -= 1;
+      setState(newState);
     }
   }
 
-  return(
-    
-    <div>
-    <div className="drawer">
-      <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col h-screen">
-        <Navbar/>
-        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story? state.story[state.currPage] : undefined} picture={state.pictures? state.pictures[state.currPage]: undefined} incrementPage={incrementPage} decrementPage={decrementPage}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
-      </div> 
-      <SideDrawer/>
-    </div>
-    
-    </div>
+  return (
+    <>
+      <div className="drawer">
+        <input
+          id="my-drawer"
+          type="checkbox"
+          className="drawer-toggle"
+        />
+        <div className="drawer-content flex flex-col h-screen">
+          <Navbar />
+          {state.storyToggle ? (
+            <StoryBook
+              backToChooseStory={backToChooseStory}
+              page={state.story ? state.story[state.currPage] : undefined}
+              picture={
+                state.pictures ? state.pictures[state.currPage] : undefined
+              }
+              incrementPage={incrementPage}
+              decrementPage={decrementPage}
+            />
+          ) : (
+            <InputCard
+              createStory={createStory}
+              updateCharacter={updateCharacter}
+              updateLocation={updateLocation}
+              updateEnding={updateEnding}
+            />
+          )}
+        </div>
+        <SideDrawer />
+      </div>
+    </>
   );
 };
 export default App;

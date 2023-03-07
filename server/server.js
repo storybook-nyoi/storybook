@@ -12,14 +12,11 @@ const corsOptions = {
 };
 
 // Apply CORs with options, and handling parsing request body
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Set up routes
 app.use("/create", createRouter);
-
-// Route to serve up main app
-// app.get('/', (req, res) => res.status(200).sendFile());
 
 // Catch-All Route Handler
 app.use("*", (req, res) =>
