@@ -68,7 +68,7 @@ const App = () => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col h-screen">
         <Navbar/>
-        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story[state.currPage]} picutre={state.pictures[state.currPage]}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
+        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story? state.story[state.currPage] : undefined} picutre={state.pictures? state.pictures[state.currPage]: undefined}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
       </div> 
       <SideDrawer/>
     </div>
