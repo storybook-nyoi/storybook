@@ -53,9 +53,34 @@ createController.getStory = async (req, res, next) => {
   }
 };
 
+createController.splitText = (req, res, next) => {
+  // store generated story in local variable
+  const story = res.locals.story;
+  // split string on line
+  const splits = story.split("\n");
+  // create object that will be passed onto next middleware
+  const splitStory = {};
+  // initialize counter to manage object key values
+  let counter = 1;
+  // iterate through array
+  splits.forEach((split) => {
+    // if a split is empty, don't add split into splitStory object
+    if (!split.length) {
+      return;
+    } else {
+      splitStory[counter] = split;
+      counter++;
+    }
+  });
+  // store splitStory into res.locals.splitStory
+  res.locals.splitStory = splitStory;
+  // move onto next middleware
+  return next();
+};
+
 createController.getImages = async (req, res, next) => {
   const splitStory = res.locals.splitStory;
-  res.locals.images = {};
+  res.locals.pictures = {};
 
   // Get Images from DALL-E
   try {
@@ -66,11 +91,11 @@ createController.getImages = async (req, res, next) => {
       const image = await openai.createImage({
         prompt,
         n: 1,
-        size: "1024x1024",
+        size: "512x512",
       });
 
       const image_url = image.data.data[0].url;
-      res.locals.images[key] = image_url;
+      res.locals.pictures[key] = image_url;
     }
     return next();
   } catch (error) {

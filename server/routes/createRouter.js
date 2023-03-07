@@ -6,11 +6,15 @@ const createRouter = express.Router();
 createRouter.post(
   "/",
   createController.getStory,
+  createController.splitText,
   createController.getImages,
   (req, res) => {
+    console.log("res.locals.story", res.locals.story);
+    console.log("res.locals.splitStory", res.locals.splitStory);
+    console.log("res.locals.images", res.locals.pictures);
     return res.status(200).json({
-      // story: res.locals.story,
-      images: res.locals.images,
+      story: res.locals.splitStory,
+      pictures: res.locals.pictures,
     });
   }
 );
