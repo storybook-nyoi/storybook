@@ -15,8 +15,10 @@ export default function StoryBook(props){
                     </div>
                 </div>
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
-                    <div className="card-body">
-                        {props.picture? <Picture picture={props.picture}/> : 'Im loading'}
+                    <div className="card-body items-center justify-center">
+                        <div>
+                            {props.picture? <Picture picture={props.picture}/> : 'Im loading'}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -31,9 +33,9 @@ export default function StoryBook(props){
 }
 
 function Page(props){
-    return <p classname="leading-[3rem]">{props.page}</p>;
+    return <p classname="w-5/8">{props.page}</p>;
 }
 
 function Picture(props){
-    return <img src={props.picture}/>
+    return <img className="max-w-xs" src={props.picture}/>
 }

@@ -26,7 +26,7 @@ createController.getStory = async (req, res, next) => {
     const completion = await openai.createCompletion({
       model: "text-davinci-003",
       prompt,
-      max_tokens: 200,
+      max_tokens: 250,
     });
 
     const firstStory = completion.data.choices[0].text;
