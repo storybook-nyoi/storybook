@@ -1,13 +1,17 @@
 import React from "react";
 
 export default function StoryBook(props){
+    console.log(props.page)
+    console.log(props.picture)
     return (
         <div className="flex h-4/5 flex-col justify-center align-center">
             <button className="btn btn-primary self-end m-1" onClick={()=>props.backToChooseStory()}>Pick a New Story</button>
             <div className="flex w-full h-full justify-center">
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
-                    <div className="card-body">
-                        {props.page? <Page page={props.currPage}/> : 'Im loading'}
+                    <div className="card-body flex flex-row items-center">
+                        <div>
+                            {props.page? <Page page={props.page}/> : 'Im loading'}
+                        </div>
                     </div>
                 </div>
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
@@ -18,8 +22,8 @@ export default function StoryBook(props){
             </div>
             <div className="justify-end self-center w-auto">
                 <div className="btn-group grid grid-cols-2">
-                    <button className="btn btn-primary">Previous</button>
-                    <button className="btn btn-primary">Next</button>
+                    <button className="btn btn-primary" onClick={()=>props.decrementPage()}>Previous</button>
+                    <button className="btn btn-primary" onClick={()=>props.incrementPage()}>Next</button>
                 </div>
             </div>
         </div>
@@ -27,10 +31,9 @@ export default function StoryBook(props){
 }
 
 function Page(props){
-    
-    <p>{props.page}</p>
+    return <p classname="leading-[3rem]">{props.page}</p>;
 }
 
 function Picture(props){
-    <img>{props.picture}</img>
+    return <img src={props.picture}/>
 }

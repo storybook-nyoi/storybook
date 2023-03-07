@@ -23,15 +23,16 @@ const App = () => {
     fetch('/create', {
       method: 'POST',
       headers: {
-        'Content-Type': 'text/plain;charset=UTF-8'
+        'Content-Type': 'application/json'
       },
-      body: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}`
+      body: JSON.stringify({ prompt: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}. In 200 words.`})
     })
     .then(data => data.json())
     .then((data) => {
       let newState = Object.assign({}, state);
       newState.story =  data.story;
       newState.pictures = data.pictures;
+      newState.storyToggle = true
       newState.currPage = 1;
       setState(newState);
     })
@@ -61,6 +62,22 @@ const App = () => {
     setState(newState)
   }
 
+  function incrementPage(){
+    let newState = Object.assign({}, state);
+    if (state.story[state.currPage + 1]){
+      newState.currPage += 1;
+      setState(newState)
+    }
+  }
+
+  function decrementPage(){
+    let newState = Object.assign({}, state);
+    if (state.currPage > 1){
+      newState.currPage -=1;
+      setState(newState)
+    }
+  }
+
   return(
     
     <div>
@@ -68,7 +85,7 @@ const App = () => {
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col h-screen">
         <Navbar/>
-        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story? state.story[state.currPage] : undefined} picutre={state.pictures? state.pictures[state.currPage]: undefined}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
+        {state.storyToggle? <StoryBook backToChooseStory={backToChooseStory} page={state.story? state.story[state.currPage] : undefined} picture={state.pictures? state.pictures[state.currPage]: undefined} incrementPage={incrementPage} decrementPage={decrementPage}/> : <InputCard createStory={createStory} updateCharacter={updateCharacter} updateLocation={updateLocation} updateEnding={updateEnding}/>}  
       </div> 
       <SideDrawer/>
     </div>
