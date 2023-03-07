@@ -7,12 +7,12 @@ export default function StoryBook(props){
             <div className="flex w-full h-full justify-center">
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
                     <div className="card-body">
-                        text card
+                        {props.page? <Page page={props.currPage}/> : 'Im loading'}
                     </div>
                 </div>
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
                     <div className="card-body">
-                        picture card
+                        {props.picture? <Picture picture={props.picture}/> : 'Im loading'}
                     </div>
                 </div>
             </div>
@@ -24,4 +24,13 @@ export default function StoryBook(props){
             </div>
         </div>
     )
+}
+
+function Page(props){
+    
+    <p>{props.page}</p>
+}
+
+function Picture(props){
+    <img>{props.picture}</img>
 }
