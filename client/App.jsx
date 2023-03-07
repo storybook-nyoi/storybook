@@ -1,38 +1,93 @@
-import React from 'react';
-import ListItem from './components/ListItem.jsx'
+import React, { useState } from 'react';
+import Navbar from './components/Navbar.jsx';
+import InputCard from './components/InputCard.jsx';
+import StoryBook from './components/StoryBook.jsx';
+import SideDrawer from './components/SideDrawer.jsx';
+
 const App = () => {
+  let [state, setState] = useState({
+    storyToggle: false,
+    character: '',
+    location: '',
+    ending: '',
+    story: undefined,
+    pictures: undefined,
+    currPage: undefined,
+  });
 
-  const storyThemes = ['Princess', 'Ninjas', 'Horses', 'Pirates', 'Explorers'];
-
-  const storyThemeComponents = [];
-
-  for (let i=0; i<storyThemes.length; i++){
-    storyThemeComponents.push(<ListItem name={storyThemes[i]}/>)
+  function createStory(storyDetails) {
+    let newState = Object.assign({}, state);
+    newState.storyToggle = true;
+    setState(newState);
+    fetch('/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: `Tell me a story about a ${state.character} that goes out into the ${state.location} and finds ${state.ending}`,
+      }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        let newState = Object.assign({}, state);
+        newState.story = data.story;
+        // newState.pictures = data.pictures;
+        newState.currPage = 1;
+        setState(newState);
+      });
   }
-  
-  return(
-    
-    <div>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost btn-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
-            </label>
-            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              {storyThemeComponents}
-            </ul>
-          </div>
-        </div>
-        <div className="navbar-start">
-          <a className="btn btn-ghost normal-case text-xl text-start">Story Book</a>
-        </div>
-    </div>
-      
-      
-    </div>
-    
-  ) 
-};
 
+  function backToChooseStory() {
+    let newState = Object.assign({}, state);
+    newState.storyToggle = false;
+    setState(newState);
+  }
+
+  function updateCharacter(changed) {
+    let newState = Object.assign({}, state);
+    newState.character = changed;
+    setState(newState);
+  }
+
+  function updateLocation(changed) {
+    let newState = Object.assign({}, state);
+    newState.location = changed;
+    setState(newState);
+  }
+
+  function updateEnding(changed) {
+    let newState = Object.assign({}, state);
+    newState.ending = changed;
+    setState(newState);
+  }
+
+  return (
+    <div>
+      <div className='drawer'>
+        <input id='my-drawer' type='checkbox' className='drawer-toggle' />
+        <div className='drawer-content flex flex-col h-screen'>
+          <Navbar />
+          {state.storyToggle ? (
+            <StoryBook
+              backToChooseStory={backToChooseStory}
+              page={state.story ? state.story[state.currPage] : undefined}
+              picutre={
+                state.pictures ? state.pictures[state.currPage] : undefined
+              }
+            />
+          ) : (
+            <InputCard
+              createStory={createStory}
+              updateCharacter={updateCharacter}
+              updateLocation={updateLocation}
+              updateEnding={updateEnding}
+            />
+          )}
+        </div>
+        <SideDrawer />
+      </div>
+    </div>
+  );
+};
 export default App;

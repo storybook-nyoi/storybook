@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const createRouter = require("./routes/createRouter");
+const config = require("./util/config");
 
 const corsOptions = {
   credentials: true,
@@ -38,8 +39,8 @@ app.use((err, req, res, next) => {
 });
 
 // Listen to server on specified port (defined within config.js)
-app.listen(3001, () => {
-  console.log(`Server listening on port: ${3001}`);
+app.listen(config.PORT, () => {
+  console.log(`Server listening on port: ${config.PORT}`);
 });
 
 module.exports = app;

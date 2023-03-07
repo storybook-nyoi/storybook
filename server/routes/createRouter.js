@@ -3,11 +3,16 @@ const createController = require("../controllers/createController");
 const createRouter = express.Router();
 
 // GET request to main endpoint
-createRouter.get(
+createRouter.post(
   "/",
-  createController.getStory,
+  // createController.getStory,
   createController.getImages,
-  (req, res) => res.status(200).send("Hello from server")
+  (req, res) => {
+    return res.status(200).json({
+      // story: res.locals.story,
+      images: res.locals.images,
+    });
+  }
 );
 
 module.exports = createRouter;
