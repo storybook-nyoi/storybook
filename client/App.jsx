@@ -1,22 +1,21 @@
-import React, {useState} from 'react';
-import Navbar from './components/Navbar.jsx'
+import React, { useState } from 'react';
+import Navbar from './components/Navbar.jsx';
 import InputCard from './components/InputCard.jsx';
 import StoryBook from './components/StoryBook.jsx';
 import SideDrawer from './components/SideDrawer.jsx';
 
 const App = () => {
-
   let [state, setState] = useState({
-    storyToggle : false,
+    storyToggle: false,
     character: '',
     location: '',
     ending: '',
     story: undefined,
     pictures: undefined,
     currPage: undefined,
-  })
+  });
 
-  function createStory(storyDetails){
+  function createStory(storyDetails) {
     let newState = Object.assign({}, state);
     newState.storyToggle = true;
     setState(newState);
@@ -38,25 +37,25 @@ const App = () => {
     })
       }
 
-  function backToChooseStory(){
+  function backToChooseStory() {
     let newState = Object.assign({}, state);
     newState.storyToggle = false;
     setState(newState);
   }
 
-  function updateCharacter(changed){
+  function updateCharacter(changed) {
     let newState = Object.assign({}, state);
     newState.character = changed;
-    setState(newState)
+    setState(newState);
   }
 
-  function updateLocation(changed){
+  function updateLocation(changed) {
     let newState = Object.assign({}, state);
     newState.location = changed;
-    setState(newState)
+    setState(newState);
   }
 
-  function updateEnding(changed){
+  function updateEnding(changed) {
     let newState = Object.assign({}, state);
     newState.ending = changed;
     setState(newState)
@@ -91,8 +90,6 @@ const App = () => {
     </div>
     
     </div>
-    
-  ) 
+  );
 };
-
 export default App;
