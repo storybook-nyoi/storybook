@@ -10,14 +10,14 @@ export default function StoryBook(props){
             <button className="btn btn-primary self-end m-1" onClick={()=>dispatch(togglePage(false))}>Pick a New Story</button>
             <div className="flex w-full h-full justify-center">
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
-                    <div className="card-body flex flex-row items-center">
+                    <div className="card-body flex justify-center items-center">
                         <div>
                             {state.story? <Page page={state.story[state.currPage]}/> : 'Im loading'}
                         </div>
                     </div>
                 </div>
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
-                    <div className="card-body items-center justify-center">
+                    <div className="card-body justify-center items-center">
                         <div>
                             {state.pictures? <Picture picture={state.pictures[state.currPage]}/> : 'Im loading'}
                         </div>
