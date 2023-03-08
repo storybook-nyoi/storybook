@@ -1,15 +1,17 @@
 import React from "react";
 import ListItem from "./ListItem.jsx";
+import {defaultStories} from "./DefaultStories.js"
 
 export default function SideDrawer() {
-  const storyThemes = ["Princess", "Ninjas", "Horses", "Pirates", "Explorers"];
+
   const storyThemeComponents = [];
 
-  for (let i = 0; i < storyThemes.length; i++) {
+  for (const key in defaultStories) {
     storyThemeComponents.push(
       <ListItem
-        key={storyThemes[i]}
-        name={storyThemes[i]}
+        key={key}
+        name={key}
+        storyObj = {defaultStories[key]}
       />
     );
   }

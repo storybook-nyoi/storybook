@@ -22,7 +22,6 @@ const storySlice = createSlice({
             state.ending = action.payload
         },
         createStory : (state, action) => {
-            console.log('State is : ', state, 'Action Payload is: ', action.payload)
             state.story = action.payload
         },
         createPictures : (state, action) => {
