@@ -26,7 +26,6 @@ export default function Navbar() {
       <div className="flex-1">
         <a className="btn btn-ghost normal-case text-xl">storybook</a>
       </div>
-      
     </div>
   );
 }

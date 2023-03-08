@@ -1,9 +1,8 @@
 import React from "react";
 import ListItem from "./ListItem.jsx";
-import {defaultStories} from "./DefaultStories.js"
+import { defaultStories } from "./DefaultStories.js";
 
 export default function SideDrawer() {
-
   const storyThemeComponents = [];
 
   for (const key in defaultStories) {
@@ -11,7 +10,7 @@ export default function SideDrawer() {
       <ListItem
         key={key}
         name={key}
-        storyObj = {defaultStories[key]}
+        storyObj={defaultStories[key]}
       />
     );
   }
