@@ -1,3 +1,16 @@
+import GoldenTouchSheet from "./Golden_Touch_SpriteSheet.png";
+import GoldenTouchSheet_1 from "./Golden_Touch_Img_1.png";
+import GoldenTouchSheet_2 from "./Golden_Touch_Img_2.png";
+import GoldenTouchSheet_3 from "./Golden_Touch_Img_3.png";
+import GoldenTouchSheet_4 from "./Golden_Touch_Img_4.png";
+import GoldenTouchSheet_5 from "./Golden_Touch_Img_5.png";
+import GoldenTouchSheet_6 from "./Golden_Touch_Img_6.png";
+import Fox_Grapes_1 from "./Fox_Grapes_Img_1.png";
+import Fox_Grapes_2 from "./Fox_Grapes_Img_2.png";
+import Fox_Grapes_3 from "./Fox_Grapes_Img_3.png";
+import Fox_Grapes_4 from "./Fox_Grapes_Img_4.png";
+import Fox_Grapes_5 from "./Fox_Grapes_Img_5.png";
+
 export const defaultStories = {
   "The Golden Touch": {
     1: `There once was a king named Midas who did a good deed for a Satyr. And he was then granted a wish by Dionysus, the god of wine.`,
@@ -18,18 +31,18 @@ export const defaultStories = {
 
 export const defaultPictures = {
   "The Golden Touch": {
-    1: "img1",
-    2: "img2",
-    3: "img3",
-    4: "img4",
-    5: "img5",
-    6: "img6",
+    1: GoldenTouchSheet_1,
+    2: GoldenTouchSheet_2,
+    3: GoldenTouchSheet_3,
+    4: GoldenTouchSheet_4,
+    5: GoldenTouchSheet_5,
+    6: GoldenTouchSheet_6,
   },
   "The Fox and The Grapes": {
-    1: "img1",
-    2: "img2",
-    3: "img3",
-    4: "img4",
-    5: "img5",
+    1: Fox_Grapes_1,
+    2: Fox_Grapes_2,
+    3: Fox_Grapes_3,
+    4: Fox_Grapes_4,
+    5: Fox_Grapes_5,
   },
 };
