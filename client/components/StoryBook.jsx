@@ -15,13 +15,16 @@ export default function StoryBook() {
   const dispatch = useDispatch();
 
   function Page(props) {
-    return <p className="font-caroni w-5/8 text-2xl">{props.page}</p>;
+    return (
+      <p className="font-caroni w-5/8 text-2xl lg:text-4xl">{props.page}</p>
+    );
   }
 
   function Picture(props) {
     return (
       <img
-        className="max-w-xs"
+        // className="w-full h-full"
+        className="w-[60%] m-auto object-contain"
         src={props.picture}
       />
     );
@@ -30,7 +33,7 @@ export default function StoryBook() {
   return (
     <div className="flex h-4/5 flex-col justify-center align-center">
       <button
-        className="btn btn-primary self-end m-1"
+        className="btn btn-primary self-end m-5"
         onClick={() => {
           dispatch(togglePage(false));
           dispatch(toggleRenderFromFetch(true));
@@ -39,8 +42,8 @@ export default function StoryBook() {
       >
         Pick a New Story
       </button>
-      <div className="flex w-full h-full justify-center">
-        <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
+      <div className="flex flex-col w-full h-full justify-center lg:flex-row">
+        <div className="card bg-base-100 shadow-xl self-center align-center w-full h-5/6 lg:w-2/5">
           <div className="card-body flex justify-center items-center">
             <div>
               {state.story ? (
@@ -51,7 +54,7 @@ export default function StoryBook() {
             </div>
           </div>
         </div>
-        <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
+        <div className="card bg-base-100 shadow-xl self-center align-center w-full h-5/6 lg:w-2/5">
           <div className="card-body justify-center items-center">
             <div>
               {state.pictures ? (
