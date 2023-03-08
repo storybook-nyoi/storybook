@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   updateCharacter,
   updateLocation,
@@ -10,7 +10,7 @@ import { getStory } from "../reducers/storyReducer.js";
 
 export default function InputCard() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.stories);
+
   const characters = [
     "princess",
     "pirate",
@@ -56,34 +56,34 @@ export default function InputCard() {
         <div className="card-body">
           <div className="p-10">
             <p className="text-xl">
-              Tell me a story about a&nbsp;&nbsp;
+              Tell me a story about a
               <select
                 type="select"
                 onChange={(e) => {
                   dispatch(updateCharacter(e.target.value));
                 }}
-                className="select-xs"
-                defaultValue={"-------"}
+                className="select-xs ml-3 mr-3"
+                defaultValue="-------"
               >
                 {makeOptList(characters)}
               </select>
-              &nbsp;&nbsp;that goes out into the&nbsp;&nbsp;
+              that goes out into the
               <select
                 onChange={(e) => {
                   dispatch(updateLocation(e.target.value));
                 }}
-                className="select-xs"
-                defaultValue={"-------"}
+                className="select-xs ml-3 mr-3"
+                defaultValue="-------"
               >
                 {makeOptList(locations)}
               </select>
-              &nbsp;&nbsp;and finds&nbsp;&nbsp;
+              and finds
               <select
                 onChange={(e) => {
                   dispatch(updateEnding(e.target.value));
                 }}
-                className="select-xs"
-                defaultValue={"-------"}
+                className="select-xs ml-3"
+                defaultValue="-------"
               >
                 {makeOptList(endings)}
               </select>

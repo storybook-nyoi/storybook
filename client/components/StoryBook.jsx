@@ -13,6 +13,19 @@ export default function StoryBook() {
   const state = useSelector((state) => state.stories);
   const dispatch = useDispatch();
 
+  function Page(props) {
+    return <p className="font-caroni w-5/8 text-2xl">{props.page}</p>;
+  }
+
+  function Picture(props) {
+    return (
+      <img
+        className="max-w-xs"
+        src={props.picture}
+      />
+    );
+  }
+
   return (
     <div className="flex h-4/5 flex-col justify-center align-center">
       <button
@@ -65,18 +78,5 @@ export default function StoryBook() {
         </div>
       </div>
     </div>
-  );
-}
-
-function Page(props) {
-  return <p className="w-5/8">{props.page}</p>;
-}
-
-function Picture(props) {
-  return (
-    <img
-      className="max-w-xs"
-      src={props.picture}
-    />
   );
 }
