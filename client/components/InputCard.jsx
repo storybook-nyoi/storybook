@@ -1,6 +1,11 @@
-import React from "react";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCharacter, updateLocation, updateEnding, togglePage } from '../reducers/storyReducer.js';
+import { getStory } from '../reducers/storyReducer.js'
 
-export default function InputCard(props) {
+export default function InputCard() {
+  const dispatch = useDispatch()
+  const state = useSelector((state) => state.stories);
   const characters = [
     "princess",
     "pirate",
@@ -17,6 +22,22 @@ export default function InputCard(props) {
     "an opportunity",
   ];
 
+  function makeOptList(arr) {
+    const output = [
+      <option key={'default'} disabled hidden>
+        -------
+      </option>,
+    ];
+    for (let i = 0; i < arr.length; i++) {
+      output.push(
+        <option key={arr[i]} value={arr[i]}>
+          {arr[i]}
+        </option>
+      );
+    }
+    return output;
+  }
+
   return (
     <div className="flex h-4/5 flex-col justify-center align-center">
       <div className="card bg-base-100 shadow-xl self-center align-center w-auto h-auto">
@@ -26,7 +47,7 @@ export default function InputCard(props) {
             <select
               type="select"
               onChange={(e) => {
-                props.updateCharacter(e.target.value);
+                dispatch(updateCharacter(e.target.value));
               }}
               className="select-xs"
               defaultValue={"-------"}
@@ -36,7 +57,7 @@ export default function InputCard(props) {
             &nbsp;&nbsp;that goes out into the&nbsp;&nbsp;
             <select
               onChange={(e) => {
-                props.updateLocation(e.target.value);
+                dispatch(updateLocation(e.target.value));
               }}
               className="select-xs"
               defaultValue={"-------"}
@@ -46,7 +67,7 @@ export default function InputCard(props) {
             &nbsp;&nbsp;and finds&nbsp;&nbsp;
             <select
               onChange={(e) => {
-                props.updateEnding(e.target.value);
+                dispatch(updateEnding(e.target.value));
               }}
               className="select-xs"
               defaultValue={"-------"}
@@ -55,8 +76,11 @@ export default function InputCard(props) {
             </select>
           </p>
           <button
-            className="btn btn-primary"
-            onClick={() => props.createStory()}
+            className='btn btn-primary'
+            onClick={() => {
+              dispatch(togglePage(true));
+              dispatch(getStory());
+            }}
           >
             Create Story
           </button>
@@ -66,25 +90,4 @@ export default function InputCard(props) {
   );
 }
 
-function makeOptList(arr) {
-  const output = [
-    <option
-      key={"default"}
-      disabled
-      hidden
-    >
-      -------
-    </option>,
-  ];
-  for (let i = 0; i < arr.length; i++) {
-    output.push(
-      <option
-        key={arr[i]}
-        value={arr[i]}
-      >
-        {arr[i]}
-      </option>
-    );
-  }
-  return output;
-}
+
