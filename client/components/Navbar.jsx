@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Navbar() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-primary">
       <div className="flex-none">
         <label
           htmlFor="my-drawer"

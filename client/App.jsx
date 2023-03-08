@@ -9,7 +9,7 @@ const App = () => {
   const state = useSelector((state) => state.stories);
 
   return (
-    <div>
+    <div className="bg-slate-50">
       <div className="drawer">
         <input
           id="my-drawer"
