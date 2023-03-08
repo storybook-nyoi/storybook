@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   storyToggle: false,
+  renderFromFetch: true,
   character: "",
   location: "",
   ending: "",
@@ -31,6 +32,9 @@ const storySlice = createSlice({
     },
     togglePage: (state, action) => {
       state.storyToggle = action.payload;
+    },
+    toggleRenderFromFetch: (state, action) => {
+      state.renderFromFetch = action.payload
     },
     initializePage: (state) => {
       state.currPage = 1;
@@ -63,9 +67,12 @@ export const getStory = () => {
     })
       .then((data) => data.json())
       .then((data) => {
-        dispatch(initializePage());
-        dispatch(createStory(data.story));
-        dispatch(createPictures(data.pictures));
+        const { renderFromFetch } = getState().stories
+        if (renderFromFetch){
+          dispatch(initializePage());
+          dispatch(createStory(data.story));
+          dispatch(createPictures(data.pictures));
+        }
       });
   };
 };
@@ -81,6 +88,7 @@ export const {
   createStory,
   initializePage,
   resetState,
+  toggleRenderFromFetch
 } = storySlice.actions;
 
 export default storySlice.reducer;

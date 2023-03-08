@@ -5,6 +5,7 @@ import {
   createStory,
   createPictures,
   initializePage,
+  toggleRenderFromFetch
 } from "../reducers/storyReducer.js";
 
 export default function ListItem(props) {
@@ -16,6 +17,7 @@ export default function ListItem(props) {
       onClick={() => {
         dispatch(initializePage());
         dispatch(togglePage(true));
+        dispatch(toggleRenderFromFetch(false))
         dispatch(createStory(props.storyObj));
         dispatch(createPictures(props.pictureObj));
       }}
