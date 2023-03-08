@@ -71,7 +71,7 @@ export default function InputCard() {
                 onChange={(e) => {
                   dispatch(updateCharacter(e.target.value));
                 }}
-                className="select-xs ml-3 mr-3"
+                className="select-xs ml-3 mr-3 bg-slate-200"
                 defaultValue="-------"
               >
                 {makeOptList(characters)}
@@ -81,7 +81,7 @@ export default function InputCard() {
                 onChange={(e) => {
                   dispatch(updateLocation(e.target.value));
                 }}
-                className="select-xs ml-3 mr-3"
+                className="select-xs ml-3 mr-3 bg-slate-200"
                 defaultValue="-------"
               >
                 {makeOptList(locations)}
@@ -91,7 +91,7 @@ export default function InputCard() {
                 onChange={(e) => {
                   dispatch(updateEnding(e.target.value));
                 }}
-                className="select-xs ml-3"
+                className="select-xs ml-3 bg-slate-200"
                 defaultValue="-------"
               >
                 {makeOptList(endings)}

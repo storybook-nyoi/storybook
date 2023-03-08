@@ -40,8 +40,15 @@ module.exports = {
       },
       {
         // File loader
-        test: /\.(png|jpg|svg|otf)$/,
-        use: ["file-loader"],
+        test: /\.(png|jpg|svg|otf|ttf)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
