@@ -1,6 +1,9 @@
 import React from "react";
 import ListItem from "./ListItem.jsx";
-import { defaultStories } from "./DefaultStories.js";
+import {
+  defaultStories,
+  defaultPictures,
+} from "../defaultStories/defaultStories";
 
 export default function SideDrawer() {
   const storyThemeComponents = [];
@@ -11,6 +14,7 @@ export default function SideDrawer() {
         key={key}
         name={key}
         storyObj={defaultStories[key]}
+        pictureObj={defaultPictures[key]}
       />
     );
   }
@@ -22,6 +26,7 @@ export default function SideDrawer() {
         className="drawer-overlay"
       />
       <ul className="menu p-4 w-80 bg-base-100 text-base-content">
+        <p>Stories</p>
         {storyThemeComponents}
       </ul>
     </div>
