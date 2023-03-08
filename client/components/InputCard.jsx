@@ -1,10 +1,15 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateCharacter, updateLocation, updateEnding, togglePage } from '../reducers/storyReducer.js';
-import { getStory } from '../reducers/storyReducer.js'
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateCharacter,
+  updateLocation,
+  updateEnding,
+  togglePage,
+} from "../reducers/storyReducer.js";
+import { getStory } from "../reducers/storyReducer.js";
 
 export default function InputCard() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.stories);
   const characters = [
     "princess",
@@ -24,13 +29,20 @@ export default function InputCard() {
 
   function makeOptList(arr) {
     const output = [
-      <option key={'default'} disabled hidden>
+      <option
+        key={"default"}
+        disabled
+        hidden
+      >
         -------
       </option>,
     ];
     for (let i = 0; i < arr.length; i++) {
       output.push(
-        <option key={arr[i]} value={arr[i]}>
+        <option
+          key={arr[i]}
+          value={arr[i]}
+        >
           {arr[i]}
         </option>
       );
@@ -76,7 +88,7 @@ export default function InputCard() {
             </select>
           </p>
           <button
-            className='btn btn-primary'
+            className="btn btn-primary"
             onClick={() => {
               dispatch(togglePage(true));
               dispatch(getStory());
@@ -89,5 +101,3 @@ export default function InputCard() {
     </div>
   );
 }
-
-
