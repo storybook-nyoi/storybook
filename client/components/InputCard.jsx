@@ -7,19 +7,19 @@ export default function InputCard() {
   const dispatch = useDispatch()
   const state = useSelector((state) => state.stories);
   const characters = [
-    'princess',
-    'pirate',
-    'horse',
-    'toad',
-    'software engineer',
+    "princess",
+    "pirate",
+    "horse",
+    "toad",
+    "software engineer",
   ];
-  const locations = ['woods', 'sea', 'fields', 'swamp', 'job market'];
+  const locations = ["woods", "sea", "fields", "swamp", "job market"];
   const endings = [
-    'peace',
-    'an adventure',
-    'trouble',
-    'happiness',
-    'an opportunity',
+    "peace",
+    "an adventure",
+    "trouble",
+    "happiness",
+    "an opportunity",
   ];
 
   function makeOptList(arr) {
@@ -39,18 +39,18 @@ export default function InputCard() {
   }
 
   return (
-    <div className='flex h-4/5 flex-col justify-center align-center'>
-      <div className='card w-96 bg-base-100 shadow-xl self-center align-center w-auto h-auto'>
-        <div className='card-body'>
+    <div className="flex h-4/5 flex-col justify-center align-center">
+      <div className="card bg-base-100 shadow-xl self-center align-center w-auto h-auto">
+        <div className="card-body">
           <p>
             Tell me a story about a&nbsp;&nbsp;
             <select
-              type='select'
+              type="select"
               onChange={(e) => {
                 dispatch(updateCharacter(e.target.value));
               }}
-              className='select-xs'
-              defaultValue={'-------'}
+              className="select-xs"
+              defaultValue={"-------"}
             >
               {makeOptList(characters)}
             </select>
@@ -59,8 +59,8 @@ export default function InputCard() {
               onChange={(e) => {
                 dispatch(updateLocation(e.target.value));
               }}
-              className='select-xs'
-              defaultValue={'-------'}
+              className="select-xs"
+              defaultValue={"-------"}
             >
               {makeOptList(locations)}
             </select>
@@ -69,8 +69,8 @@ export default function InputCard() {
               onChange={(e) => {
                 dispatch(updateEnding(e.target.value));
               }}
-              className='select-xs'
-              defaultValue={'-------'}
+              className="select-xs"
+              defaultValue={"-------"}
             >
               {makeOptList(endings)}
             </select>
