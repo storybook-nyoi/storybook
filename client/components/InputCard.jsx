@@ -52,41 +52,43 @@ export default function InputCard() {
 
   return (
     <div className="flex h-4/5 flex-col justify-center align-center">
-      <div className="card bg-base-100 shadow-xl self-center align-center w-auto h-auto">
+      <div className="card bg-base-100 shadow-2xl self-center align-center w-auto h-auto">
         <div className="card-body">
-          <p>
-            Tell me a story about a&nbsp;&nbsp;
-            <select
-              type="select"
-              onChange={(e) => {
-                dispatch(updateCharacter(e.target.value));
-              }}
-              className="select-xs"
-              defaultValue={"-------"}
-            >
-              {makeOptList(characters)}
-            </select>
-            &nbsp;&nbsp;that goes out into the&nbsp;&nbsp;
-            <select
-              onChange={(e) => {
-                dispatch(updateLocation(e.target.value));
-              }}
-              className="select-xs"
-              defaultValue={"-------"}
-            >
-              {makeOptList(locations)}
-            </select>
-            &nbsp;&nbsp;and finds&nbsp;&nbsp;
-            <select
-              onChange={(e) => {
-                dispatch(updateEnding(e.target.value));
-              }}
-              className="select-xs"
-              defaultValue={"-------"}
-            >
-              {makeOptList(endings)}
-            </select>
-          </p>
+          <div className="p-10">
+            <p className="text-xl">
+              Tell me a story about a&nbsp;&nbsp;
+              <select
+                type="select"
+                onChange={(e) => {
+                  dispatch(updateCharacter(e.target.value));
+                }}
+                className="select-xs"
+                defaultValue={"-------"}
+              >
+                {makeOptList(characters)}
+              </select>
+              &nbsp;&nbsp;that goes out into the&nbsp;&nbsp;
+              <select
+                onChange={(e) => {
+                  dispatch(updateLocation(e.target.value));
+                }}
+                className="select-xs"
+                defaultValue={"-------"}
+              >
+                {makeOptList(locations)}
+              </select>
+              &nbsp;&nbsp;and finds&nbsp;&nbsp;
+              <select
+                onChange={(e) => {
+                  dispatch(updateEnding(e.target.value));
+                }}
+                className="select-xs"
+                defaultValue={"-------"}
+              >
+                {makeOptList(endings)}
+              </select>
+            </p>
+          </div>
           <button
             className="btn btn-primary"
             onClick={() => {

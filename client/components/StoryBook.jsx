@@ -1,4 +1,6 @@
 import React from "react";
+import LoadingText from "./LoadingText.jsx";
+import LoadingImage from "./LoadingImage.jsx";
 import { useDispatch, useSelector } from "react-redux";
 import {
   togglePage,
@@ -7,9 +9,10 @@ import {
   resetState,
 } from "../reducers/storyReducer.js";
 
-export default function StoryBook(props) {
+export default function StoryBook() {
   const state = useSelector((state) => state.stories);
   const dispatch = useDispatch();
+
   return (
     <div className="flex h-4/5 flex-col justify-center align-center">
       <button
@@ -28,7 +31,7 @@ export default function StoryBook(props) {
               {state.story ? (
                 <Page page={state.story[state.currPage]} />
               ) : (
-                "Im loading"
+                <LoadingText />
               )}
             </div>
           </div>
@@ -39,7 +42,7 @@ export default function StoryBook(props) {
               {state.pictures ? (
                 <Picture picture={state.pictures[state.currPage]} />
               ) : (
-                "Im loading"
+                <LoadingImage />
               )}
             </div>
           </div>

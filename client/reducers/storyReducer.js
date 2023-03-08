@@ -24,7 +24,6 @@ const storySlice = createSlice({
       state.ending = action.payload;
     },
     createStory: (state, action) => {
-      console.log("State is : ", state, "Action Payload is: ", action.payload);
       state.story = action.payload;
     },
     createPictures: (state, action) => {
@@ -33,14 +32,14 @@ const storySlice = createSlice({
     togglePage: (state, action) => {
       state.storyToggle = action.payload;
     },
-    initializePage: (state, action) => {
+    initializePage: (state) => {
       state.currPage = 1;
     },
-    incrementPage: (state, action) => {
+    incrementPage: (state) => {
       if (state.story[state.currPage + 1]) state.currPage += 1;
       else return;
     },
-    decrementPage: (state, action) => {
+    decrementPage: (state) => {
       if (state.currPage > 1) state.currPage -= 1;
     },
     resetState: () => initialState,
