@@ -16,7 +16,7 @@ export default function StoryBook() {
 
   function Page(props) {
     return (
-      <p className="font-caroni w-5/8 text-2xl lg:text-4xl">{props.page}</p>
+      <p className="font-caroni w-5/8 text-2xl lg:text-2xl">{props.page}</p>
     );
   }
 
