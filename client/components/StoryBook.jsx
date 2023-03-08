@@ -7,6 +7,7 @@ import {
   incrementPage,
   decrementPage,
   resetState,
+  toggleRenderFromFetch,
 } from "../reducers/storyReducer.js";
 
 export default function StoryBook() {
@@ -32,6 +33,7 @@ export default function StoryBook() {
         className="btn btn-primary self-end m-1"
         onClick={() => {
           dispatch(togglePage(false));
+          dispatch(toggleRenderFromFetch(true))
           dispatch(resetState());
         }}
       >
