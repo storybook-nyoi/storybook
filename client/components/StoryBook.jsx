@@ -51,7 +51,7 @@ export default function StoryBook() {
       <div className="justify-end self-center w-auto">
         <div className="btn-group grid grid-cols-2">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary border-l-2"
             onClick={() => dispatch(decrementPage())}
           >
             Previous
