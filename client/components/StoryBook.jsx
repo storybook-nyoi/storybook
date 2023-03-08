@@ -1,6 +1,9 @@
 import React from "react";
+import LoadingText from "./LoadingText.jsx";
+import LoadingImage from "./LoadingImage.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { togglePage, incrementPage, decrementPage } from '../reducers/storyReducer.js'
+import { togglePage, incrementPage, decrementPage } from '../reducers/storyReducer.js';
+
 
 export default function StoryBook(props){
     const state = useSelector((state) => state.stories);
@@ -12,14 +15,14 @@ export default function StoryBook(props){
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
                     <div className="card-body flex justify-center items-center">
                         <div>
-                            {state.story? <Page page={state.story[state.currPage]}/> : 'Im loading'}
+                            {state.story? <Page page={state.story[state.currPage]}/> : <LoadingText/>}
                         </div>
                     </div>
                 </div>
                 <div className="card bg-base-100 shadow-xl self-center align-center w-2/5 h-5/6">
                     <div className="card-body justify-center items-center">
                         <div>
-                            {state.pictures? <Picture picture={state.pictures[state.currPage]}/> : 'Im loading'}
+                            {state.pictures? <Picture picture={state.pictures[state.currPage]}/> : <LoadingImage/>}
                         </div>
                     </div>
                 </div>
