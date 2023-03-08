@@ -17,14 +17,23 @@ export default function InputCard() {
     "horse",
     "toad",
     "software engineer",
+    "knight",
+    "cowboty",
+    "girl",
+    "boy"
   ];
-  const locations = ["woods", "sea", "fields", "swamp", "job market"];
+  const locations = ["woods", "sea", "fields", "swamp", "job market", "jungle", "desert"];
   const endings = [
     "peace",
     "an adventure",
+    "a community",
     "trouble",
     "happiness",
     "an opportunity",
+    "friendship",
+    "treasure",
+    "wisdom",
+    "a magical book"
   ];
 
   function makeOptList(arr) {
