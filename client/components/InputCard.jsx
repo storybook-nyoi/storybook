@@ -18,7 +18,7 @@ export default function InputCard() {
     "toad",
     "software engineer",
     "knight",
-    "cowboty",
+    "cowboy",
     "girl",
     "boy"
   ];
