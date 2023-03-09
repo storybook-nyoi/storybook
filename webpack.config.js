@@ -1,24 +1,22 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: './client/index.jsx',
+  entry: "./client/index.jsx",
   output: {
-    path: path.resolve(__dirname, '/dist'),
-    filename: 'bundle.js',
+    path: path.resolve(__dirname, "/dist"),
+    filename: "bundle.js",
   },
   devServer: {
     port: 3000,
     liveReload: true,
     proxy: {
-      '/paths': {
-        target: 'http://localhost:3000',
-        router: () => 'http://localhost:3001',
-        logLevel: 'debug',
+      "/create": {
+        target: "http://localhost:3001",
       },
     },
   },
-  devtool: 'source-map',
+  devtool: "source-map",
   module: {
     rules: [
       {
@@ -26,23 +24,36 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+            presets: ["@babel/preset-env", "@babel/preset-react"],
           },
         },
       },
       {
-        // CSS loader
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          "style-loader",
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          "postcss-loader",
+        ],
       },
       {
         // File loader
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: ['file-loader'],
+        test: /\.(png|jpg|svg|otf|ttf)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './client/index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: "./client/index.html" })],
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
 };

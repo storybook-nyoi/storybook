@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Caroni";
+  src: url("./fonts/Caroni-Regular.otf") format('opentype'),
+}
